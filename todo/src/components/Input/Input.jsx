@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import styles from '../Input/styles.module.css'
 export default function Input({ addTodo }) {
   const [value, setValue] = useState('');
   function handleChange(event) {
@@ -18,17 +18,15 @@ export default function Input({ addTodo }) {
     }
 
   return (
-    <div>
+    <div className={styles.input}>
       <input 
         onKeyPress={handleKeyPress}
         placeholder='Create a new todo...'
-        style={{
-          margin: '20px 0'
-        }}
         value={value}
         onChange={handleChange}
+        className={styles.field}
       />
-      <button onClick={handleAddTodo}>Add todo</button>
+      <button className={styles.btn} onClick={handleAddTodo}>Add todo</button>
     </div>
 
   )

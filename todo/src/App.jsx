@@ -1,10 +1,11 @@
-import './App.css';
-import Todos from './components/Todos';
+
+import {Todos} from './components/Todos';
+import styles from './App.module.css'
 
 function App() {
   return (
-    <div className="App">
-      <h1>TODO</h1>
+    <div className={styles.app}>
+      <h1 className={styles.title}>TODO</h1>
       <Todos />
     </div>
   );
