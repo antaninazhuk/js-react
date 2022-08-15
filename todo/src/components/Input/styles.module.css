@@ -1,0 +1,39 @@
+.input {
+    display: flex;
+    margin-bottom: 50px;
+    margin-top: 65px;
+}
+
+.field {
+    font-size: 2rem;
+    outline: none;
+    padding: 5px 10px;
+    background: #25273C;
+    border: solid 1px #0d0e16;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 59px;
+    letter-spacing: 0.1em;
+}
+
+.field::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 59px;
+    letter-spacing: 0.1em;
+}
+
+.btn {
+    font-size: 2rem;
+    padding: 5px 10px;
+    background: #2a2d56;
+    border: solid 1px #0d0e16;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 59px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+}
