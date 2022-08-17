@@ -1,14 +1,27 @@
+import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+import Form from "./components/Form/Form";
+import styled from "styled-components";
 
-import {Todos} from './components/Todos';
-import styles from './App.module.css'
+const Card = styled.div`
+  text-align: center;
+  margin-bottom: 10px`
 
 function App() {
+  const [cards, setCards] = useState([]);
+
+  function handleAddCards(value) {  
+    setCards([...cards, value]);
+  }
+
+
   return (
-    <div className={styles.app}>
-      <h1 className={styles.title}>TODO</h1>
-      <Todos />
+    <div>
+       <Form handleAdd={handleAddCards} />
+       {cards.map(card => <Card key={uuidv4()} ><p>{card.firstName}</p><p>{card.lastName}</p><p>{card.birthday}</p><p>{card.country}</p></Card>)}
     </div>
-  );
-}
+    );
+  }
+
 
 export default App;
