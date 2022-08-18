@@ -1,0 +1,25 @@
+.todoItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid rgba(72, 64, 64, 0.37);
+}
+
+.toDo {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 59px;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.button {
+    padding: 5px 8px;
+    background: #0e0122;
+    color: #ffffff;
+    border: none;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+}
