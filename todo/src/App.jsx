@@ -1,24 +1,28 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
-import Form from "./components/Form/Form";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 
-const Card = styled.div`
-  text-align: center;
-  margin-bottom: 10px`
 
 function App() {
-  const [cards, setCards] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-  function handleAddCards(value) {  
-    setCards([...cards, value]);
-  }
+
+
+  useEffect(() => {
+    const fetchedData = async () => {
+      const response = await fetch('https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=eEIlY0s6093KSITXAHFLUr4bwrRW2rM0');
+      const data = await response.json();
+      setPosts(data)
+      console.log(data);
+    }
+    fetchedData();
+    
+
+  }, [])
+
 
 
   return (
     <div>
-       <Form handleAdd={handleAddCards} />
-       {cards.map(card => <Card key={uuidv4()} ><p>{card.firstName}</p><p>{card.lastName}</p><p>{card.birthday}</p><p>{card.country}</p></Card>)}
+       {posts.status}
     </div>
     );
   }
