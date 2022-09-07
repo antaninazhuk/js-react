@@ -1,61 +1,27 @@
 import React, { useState } from 'react'
 import TodoItem from './components/TodoItem/TodoItem'; 
 import Input from '../Input/Input';
-import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo } from '../../store/features/todoSlice';
 import styles from '../Todos/styles.module.css'
 
-const initialState = [
-    {        
-        "id": 1,
-        "title": "go swimming",
-        "completed": true
-    },
-    {
-        "id": 2,
-        "title": "buy bread",
-        "completed": false
-    },
-    {
-        "id": 3,
-        "title": "call sister",
-        "completed": false
-    },
-    {
-        "id": 4,
-        "title": "do homework",
-        "completed": false
-    },
-]
-
 export function Todos() {
-    const [todos, setTodos] = useState(initialState);
+    const [text, setText] = useState('');
+    const dispatch = useDispatch();
 
-    function addTodo(todo) {
-        let copy = [...todos];
-        copy.push({
-            id: uuidv4(),
-            title: todo,
-        });
-        setTodos(copy)
+    const handleAddTodoAction = () => {
+        dispatch(addTodo({text}));
+        setText('');
     }
 
-    function handleDeleteTodo(id) {
-        let filteredTodos = todos.filter(todo => todo.id !== id);
-        setTodos(filteredTodos);
-    }
+    const todos = useSelector(state => state.todos.todos);
 
-    function handleCompleted(id) {
-        let isCompletedTodos = todos.map(todo => todo.id === id ? ({...todo, completed:true}) : todo)
-        setTodos(isCompletedTodos);
-
-    }
-
-
+    
     return (
         <div>
-            <Input addTodo={addTodo} />
+            <Input value={text} updateText={setText} handleAction={handleAddTodoAction} />
             <ul className={styles.list}>
-                {todos.map(todo => <TodoItem key={todo.id} {...todo} deleteTodo={handleDeleteTodo} isCompleted={handleCompleted} />)}
+            {todos.map(todo => <TodoItem key={todo.id} data = {todo} />)}
             </ul>
         </div>
     )

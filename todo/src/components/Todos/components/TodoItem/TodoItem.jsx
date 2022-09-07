@@ -1,31 +1,35 @@
-import React from 'react'
-import styles from '../TodoItem/styles.module.css'
-import styled from 'styled-components'
+import React from 'react';
+import styles from '../TodoItem/styles.module.css';
+import styled from 'styled-components';
+import classNames from 'classnames';
+import { useDispatch } from 'react-redux';
+import { toggleComplete, removeTodo } from '../../../../store/features/todoSlice';
 
 const Title = styled.span`
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 59px;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: ${todo => todo.completed ? 'line-through' : 'none'}
+font-weight: 400;
+font-size: 28px;
+line-height: 59px;
+letter-spacing: 0.1em;
+color: rgba(255, 255, 255, 0.7);
 `
 
+export default function TodoItem({data}) {
+    const { id, text, completed} = data;
+    const dispatch = useDispatch();    
 
-export default function TodoItem(todo) {
-    const { id, title, completed, deleteTodo, isCompleted} = todo;
-   
-    return (
-        
+    const completedClass = classNames('', {'line-through':completed});   
+    return (        
         <li className={styles.todoItem}>
             <div>
-            <input type="checkbox" checked={completed} onClick={() => isCompleted(id)} />    
-            <Title completed={completed}>{`${title}`}</Title>
+              <input type="checkbox" onClick={() => dispatch(toggleComplete({id}))}  />    
+              <Title className={completedClass}>{text}</Title>
             </div>
-            <button className={styles.button} onClick={() => deleteTodo(id)} >Delete</button>
-           
-        </li>
-      
+              <button 
+                className={styles.button}
+                onClick={() => dispatch(removeTodo({id}))}>
+                Delete
+              </button>           
+        </li>      
     )
 }
 
